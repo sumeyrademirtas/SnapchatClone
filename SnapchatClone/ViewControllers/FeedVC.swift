@@ -21,7 +21,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let fireStoreDatabase = Firestore.firestore()
     var snapArray = [Snap]()
     var chosenSnap: Snap?
-    var timeLeft: Int?
+   // var timeLeft: Int?
     
     
     
@@ -59,17 +59,18 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                                         if difference >= 24 {
                                             //Delete
                                             self.fireStoreDatabase.collection("Snaps").document(documentId).delete { (error) in
+                                                
                                             }
-                                        }
+                                        } else {
+                                                let snap = Snap(username: username, imageUrlArray: imageUrlArray, date: date.dateValue(), timeDifference: 24-difference)
+                                                self.snapArray.append(snap)
+                                            }
                                         
-                                        //Timeleft -> SnapVC
-                                        self.timeLeft = 24 - difference
+                                                                           
                                     }
                                     
                                     
-                                    
-                                    let snap = Snap(username: username, imageUrlArray: imageUrlArray, date: date.dateValue())
-                                    self.snapArray.append(snap)
+                                   
                                 }
                             }
                         }
@@ -124,7 +125,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             let destinationVC = segue.destination as! SnapVC
             destinationVC.selectedSnap = chosenSnap
-            destinationVC.selectedTime = self.timeLeft
+            //destinationVC.selectedTime = self.timeLeft
                 
             }
     }
