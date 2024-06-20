@@ -10,6 +10,7 @@ pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 pod 'FirebaseCore'
 pod 'FirebaseStorage'
+pod 'SDWebImage'
 
   # Pods for SnapchatClone
 
